@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import StudRegistration from './components/StudRegistration'
+import SearchRegistration from './components/SearchRegistration'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/' element={<StudRegistration/>}/>
+        <Route path='/search' element={<SearchRegistration/>}/>
       </Routes>
       </BrowserRouter>
     </>
