@@ -1,8 +1,10 @@
 import React from 'react'
+import NavBar from './NavBar'
 
 const StudRegistration = () => {
   return (
     <div>
+        <NavBar/>
         <div
             style={{
                 backgroundColor: "#F4F7F2",
