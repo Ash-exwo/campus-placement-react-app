@@ -1,110 +1,170 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import NavBar from './NavBar'
 
 const ViewRegistration = () => {
 
     const [data, changeData] = useState([])
-    const fetchData = () =>{
-        axios.get("https://raw.githubusercontent.com/anishpdm/demo-json-api/refs/heads/main/placement.json").then(
-            (response)=>{
-                changeData(response.data)
-            }
-        ).catch()
+
+    const fetchData = () => {
+        axios.get("https://raw.githubusercontent.com/anishpdm/demo-json-api/refs/heads/main/placement.json")
+            .then(
+                (response) => {
+                    changeData(response.data)
+                }
+            )
+            .catch()
     }
 
     useEffect(
-        ()=>{
+        () => {
             fetchData()
         }
     )
 
-  return (
-    <div className="container py-5">
+    return (
+        <div
+            style={{
+                backgroundColor: "#F4F7F2",
+                minHeight: "100vh"
+            }}
+        >
 
-    <h2
-        className="text-center fw-bold mb-5"
-        style={{ color: "#2B5748" }}
-    >
-        Student Registration Details
-    </h2>
+            <NavBar />
+
+            <div className="container py-5">
+
+                <h2
+                    className="text-center mb-4 fw-bold"
+                    style={{ color: "#2B5748" }}
+                >
+                    Student Registration Details
+                </h2>
 
 
-    <div className="row g-4">
-
-        {data.map(
-            (value,index) =>{
-                return(
-                    <div
-                    className="col-12 col-sm-6 col-md-4 col-lg-4"
+                <div
+                    className="card shadow-sm border-0"
+                    style={{
+                        borderRadius: "15px",
+                        overflow: "hidden"
+                    }}
                 >
 
-                    <div className="card h-100 shadow border-0 rounded-4">
+                    <div className="table-responsive">
 
-                        <div className="card-body">
+                        <table className="table table-hover mb-0">
 
-                            <h4
-                                className="fw-bold text-center mb-3"
-                                style={{ color: "#2B5748" }}
+
+                            <thead
+                                style={{
+                                    backgroundColor: "#2B5748",
+                                    color: "#FFFFFF"
+                                }}
                             >
-                                {value.fullName}
-                            </h4>
+
+                                <tr>
+
+                                    <th className="py-3">
+                                        Registration No
+                                    </th>
+
+                                    <th className="py-3">
+                                        Full Name
+                                    </th>
+
+                                    <th className="py-3">
+                                        Branch
+                                    </th>
+
+                                    <th className="py-3">
+                                        SSLC Mark
+                                    </th>
+
+                                    <th className="py-3">
+                                        Plus Two Mark
+                                    </th>
+
+                                    <th className="py-3">
+                                        UG Mark
+                                    </th>
+
+                                    <th className="py-3">
+                                        PG Mark
+                                    </th>
+
+                                </tr>
+
+                            </thead>
 
 
-                            <p className="card-text">
+                            <tbody>
 
-                                <strong>Registration No :</strong>
-                                {" "}
-                                {value.regNo}
+                                {
+                                    data.map(
+                                        (value, index) => {
 
-                                <br />
+                                            return (
 
-                                <strong>Branch :</strong>
-                                {" "}
-                                {value.branch}
+                                                <tr key={index}>
 
-                                <br />
+                                                    <td>
+                                                        {value.regNo}
+                                                    </td>
 
-                                <strong>SSLC Mark :</strong>
-                                {" "}
-                                {value.sslcMark} %
+                                                    <td>
+                                                        {value.fullName}
+                                                    </td>
 
-                                <br />
+                                                    <td>
+                                                        {value.branch}
+                                                    </td>
 
-                                <strong>Plus Two Mark :</strong>
-                                {" "}
-                                {value.plusTwoMark} %
+                                                    <td>
+                                                        {value.sslcMark} %
+                                                    </td>
 
-                                <br />
+                                                    <td>
+                                                        {value.plusTwoMark} %
+                                                    </td>
 
-                                <strong>UG Mark :</strong>
-                                {" "}
-                                {value.ugMark} %
+                                                    <td>
+                                                        {value.ugMark} %
+                                                    </td>
 
-                                <br />
+                                                    <td>
+                                                        {
+                                                            value.pgMark
+                                                                ? value.pgMark + " %"
+                                                                : "N/A"
+                                                        }
+                                                    </td>
 
-                                <strong>PG Mark :</strong>
-                                {" "}
-                                {value.pgMark || "N/A"}
+                                                </tr>
 
-                                {value.pgMark && " %"}
+                                            )
 
-                            </p>
+                                        }
+                                    )
+                                }
 
-                        </div>
+
+                            </tbody>
+
+
+                        </table>
+
 
                     </div>
 
+
                 </div>
-                )
-            }
-        )}
-                
 
 
-    </div>
+            </div>
 
-</div>
-  )
+
+        </div>
+    )
 }
 
 export default ViewRegistration
